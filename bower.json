@@ -1,0 +1,35 @@
+{
+  "name": "bootstrap-shapestyle-dialog",
+  "version": "0.1.0",
+  "authors": [
+    "zzzhan <chunzhan.he@gmail.com>"
+  ],
+  "description": "A shape style options dialog for Twitter Bootstrap",
+  "main": [
+    "src/js/jbootstrap-shapestyle-dialog.js",
+    "src/css/bootstrap-shapestyle-dialog.css",
+    "src/css/bootstrap-shapestyle-dialog-ic.css",
+    "src/img/bootstrap-shapestyle-dialog.png"
+  ],
+  "keywords": [
+    "Shape Style",
+    "Options Dialog",
+    "Bootstrap"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zzzhan/bootstrap-shapestyle-dialog",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-colorpicker-plus": "https://github.com/zzzhan/bootstrap-colorpicker-plus.git",
+    "seiyria-bootstrap-slider": "https://github.com/seiyria/bootstrap-slider.git#~4.8.1",
+    "bootstrap-dropdown-submenu": "https://github.com/zzzhan/bootstrap-dropdown-submenu.git",
+    "jquery-imagerect": "https://github.com/zzzhan/jquery-imagerect.git",
+    "font-awesome-min": "~4.3.0"
+  }
+}
