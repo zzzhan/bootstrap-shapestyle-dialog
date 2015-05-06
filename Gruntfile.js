@@ -3,48 +3,26 @@ module.exports = function (grunt) {
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
       options: {
-        banner: '/*! <%= pkg.file %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+        banner: '/*! <%= pkg.file %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        mangle: {toplevel: true},
+        squeeze: {dead_code: false},
+        codegen: {quote_keys: true}
       },
-	  mangle: {toplevel: true},
-	  squeeze: {dead_code: false},
-	  codegen: {quote_keys: true},
       build: {
-		files: {
-			'dist/js/<%= pkg.file %>.min.js':'src/js/<%=pkg.file %>.js'
-		}
+    		files: {
+    			'dist/js/<%= pkg.file %>.min.js':'src/js/<%=pkg.file %>.js'
+    		}
       }
     },
     jshint: {
       options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: false,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        unused: true,
-        boss: true,
-        eqnull: true,
-        browser: true,
-        globals: {
-          $ : true,
-          Modernizr : true,
-          console: true,
-          define: true,
-          module: true,
-          require: true
-        },
-        "-W099": true,
+        jshintrc: '.jshintrc'
       },
-      gruntfile: {
-        src: 'Gruntfile.js'
-      },
-      js: {
-        src: 'src/js/<%=pkg.file %>.js'
-      }
-	},
+      all: [
+        'Gruntfile.js',
+        'src/js/*.js'
+      ]
+    },
     concat: {
       options: {
         separator: ';',
@@ -57,18 +35,18 @@ module.exports = function (grunt) {
         dest: "dist/css/<%=pkg.file %>.css"
       }
     },
-	cssmin: {
+  	cssmin: {
       options: {
         report: 'gzip'
       },
       build: {
-		files: {
-			'dist/css/<%= pkg.file %>.min.css':'dist/css/<%=pkg.file %>.css'
-		}
+        files: {
+        'dist/css/<%= pkg.file %>.min.css':'dist/css/<%=pkg.file %>.css'
+        }
       }
-	},
+  	},
     imagemin: {
-      prod: {
+      build: {
         options: {
           optimizationLevel: 7,
           pngquant: true
@@ -78,15 +56,15 @@ module.exports = function (grunt) {
         ]
       }
     },
-	copy: {
+    copy: {
       build: {
-		files: {
-			'dist/js/<%= pkg.file %>.js':'src/js/<%=pkg.file %>.js'
-		}
+        files: {
+        'dist/js/<%= pkg.file %>.js':'src/js/<%=pkg.file %>.js'
+        }
       }
-	},
-	htmlmin: {
-      dist: {
+    },
+    htmlmin: {
+      build: {
         options: {
           removeComments: true,
           collapseWhitespace: true
@@ -96,8 +74,37 @@ module.exports = function (grunt) {
         }
       }
     },
-    clean: ['dist']
+    clean: ['dist'],
+    cipher: {
+      encrypt: {
+        options: {
+          pk:grunt.cli.options.pk||grunt.file.read('.pk'),
+          inputEncoding:'binary'
+        },
+        files: [{
+          expand:true,
+          cwd:'src/',
+          src:['**/*'],
+          dest:'cipher/'
+        }]
+      },      
+      decrypt: {
+        options: {
+          pk:grunt.cli.options.pk||grunt.file.read('.pk'),
+          method:'decrypt',
+          outputEncoding:'binary'
+        },
+        files: [{
+          expand:true,
+          cwd:'cipher/',
+          src:['**/*'],
+          dest:'src/'
+        }]
+      }
+    }
   });
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
-  grunt.registerTask('default', ['jshint','clean','uglify','concat','cssmin','htmlmin','imagemin']);
+  grunt.registerTask('decrypt', ['cipher:decrypt']);
+  grunt.registerTask('test', ['jshint','clean', 'cipher:encrypt']);
+  grunt.registerTask('default', ['test', 'uglify','concat','cssmin','htmlmin','imagemin']);
 };
