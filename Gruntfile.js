@@ -32,7 +32,7 @@ module.exports = function (grunt) {
         src: [
           "src/css/*.css"
         ],
-        dest: "dist/css/<%=pkg.file %>.css"
+        dest: "tmp/css/<%=pkg.file %>.css"
       }
     },
   	cssmin: {
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
       },
       build: {
         files: {
-        'dist/css/<%= pkg.file %>.min.css':'dist/css/<%=pkg.file %>.css'
+        'dist/css/<%= pkg.file %>.min.css':'tmp/css/<%=pkg.file %>.css'
         }
       }
   	},
@@ -74,13 +74,12 @@ module.exports = function (grunt) {
         }
       }
     },
-    clean: ['dist'],
+    clean: ['tmp', 'dist'],
     cipher: {
+      options: {
+        pk:grunt.cli.options.pk||grunt.file.read('.pk')
+      },
       encrypt: {
-        options: {
-          pk:grunt.cli.options.pk||grunt.file.read('.pk'),
-          inputEncoding:'binary'
-        },
         files: [{
           expand:true,
           cwd:'src/',
@@ -90,9 +89,7 @@ module.exports = function (grunt) {
       },      
       decrypt: {
         options: {
-          pk:grunt.cli.options.pk||grunt.file.read('.pk'),
-          method:'decrypt',
-          outputEncoding:'binary'
+          method:'decrypt'
         },
         files: [{
           expand:true,
