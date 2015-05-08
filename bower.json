@@ -23,7 +23,11 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "cipher",
+    "*.html",
+    "Gruntfile.js",
+    "package.json"
   ],
   "dependencies": {
     "bootstrap-colorpicker-plus": "https://github.com/zzzhan/bootstrap-colorpicker-plus.git",
