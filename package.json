@@ -1,6 +1,6 @@
 {
   "name": "bootstrap-shapestyle-dialog",
-  "file": "bootstrap-shapestyle-dialog",
+  "file": "bootstrap-ssdlg",
   "version": "0.1.0",
   "description": "A shape style options dialog for Twitter Bootstrap",
   "devDependencies": {

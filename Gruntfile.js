@@ -59,7 +59,7 @@ module.exports = function (grunt) {
     copy: {
       build: {
         files: {
-        'dist/js/<%= pkg.file %>.js':'src/js/<%=pkg.file %>.js'
+        'dist/img/<%= pkg.file %>.png':'src/img/<%=pkg.file %>.png'
         }
       }
     },

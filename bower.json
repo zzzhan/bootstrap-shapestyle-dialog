@@ -6,10 +6,10 @@
   ],
   "description": "A shape style options dialog for Twitter Bootstrap",
   "main": [
-    "src/js/jbootstrap-shapestyle-dialog.js",
-    "src/css/bootstrap-shapestyle-dialog.css",
-    "src/css/bootstrap-shapestyle-dialog-ic.css",
-    "src/img/bootstrap-shapestyle-dialog.png"
+    "src/js/jbootstrap-ssdlg.js",
+    "src/css/bootstrap-ssdlg.css",
+    "src/css/bootstrap-ssdlg-icon.css",
+    "src/img/bootstrap-ssdlg.png"
   ],
   "keywords": [
     "Shape Style",
