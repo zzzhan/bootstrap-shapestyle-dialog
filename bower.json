@@ -6,10 +6,8 @@
   ],
   "description": "A shape style options dialog for Twitter Bootstrap",
   "main": [
-    "src/js/jbootstrap-ssdlg.js",
-    "src/css/bootstrap-ssdlg.css",
-    "src/css/bootstrap-ssdlg-icon.css",
-    "src/img/bootstrap-ssdlg.png"
+    "dist/js/jbootstrap-ssdlg.min.js",
+    "dist/css/bootstrap-ssdlg.min.css"
   ],
   "keywords": [
     "Shape Style",
