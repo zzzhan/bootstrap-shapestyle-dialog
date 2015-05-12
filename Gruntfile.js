@@ -70,11 +70,27 @@ module.exports = function (grunt) {
           collapseWhitespace: true
         },
         files: {
-          'dist/tpl/<%=pkg.file %>.min.html': 'src/tpl/<%=pkg.file %>.html'
+          'dist/tpl/<%=pkg.file %>.min.html': 'tmp/<%=pkg.file %>.html',
+          'dist/tpl/<%=pkg.file %>_zh_cn.min.html': 'tmp/<%=pkg.file %>_zh_cn.html'
         }
       }
     },
     clean: ['tmp', 'dist'],
+    dotpl: {
+      options: {
+        tpl:'src/tpl/<%=pkg.file %>.html'
+      },
+      default_lang: {
+        files: {
+          'tmp/<%=pkg.file %>.html': ['src/lang/en-us.json']
+        }
+      },
+      zh_cn: {
+        files: {
+          'tmp/<%=pkg.file %>_zh_cn.html': ['src/lang/en-us.json', 'src/lang/zh-cn.json']
+        }
+      }
+    },
     cipher: {
       options: {
         pk:grunt.cli.options.pk||grunt.file.read('.pk')
@@ -102,6 +118,6 @@ module.exports = function (grunt) {
   });
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   grunt.registerTask('decrypt', ['cipher:decrypt']);
-  grunt.registerTask('test', ['jshint','clean', 'cipher:encrypt']);
-  grunt.registerTask('default', ['test', 'uglify','concat','cssmin','htmlmin','imagemin']);
+  grunt.registerTask('noimg', ['jshint','clean','cipher:encrypt','dotpl','htmlmin','uglify','concat','cssmin']);
+  grunt.registerTask('default', ['noimg','imagemin']);
 };
