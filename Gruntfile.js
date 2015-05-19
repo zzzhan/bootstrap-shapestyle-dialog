@@ -71,7 +71,8 @@ module.exports = function (grunt) {
         },
         files: {
           'dist/tpl/<%=pkg.file %>.min.html': 'tmp/<%=pkg.file %>.html',
-          'dist/tpl/<%=pkg.file %>_zh_cn.min.html': 'tmp/<%=pkg.file %>_zh_cn.html'
+          'dist/tpl/<%=pkg.file %>_zh_cn.min.html': 'tmp/<%=pkg.file %>_zh_cn.html',
+          'dist/tpl/<%=pkg.file %>_zh_tw.min.html': 'tmp/<%=pkg.file %>_zh_tw.html'
         }
       }
     },
@@ -88,6 +89,11 @@ module.exports = function (grunt) {
       zh_cn: {
         files: {
           'tmp/<%=pkg.file %>_zh_cn.html': ['src/lang/en-us.json', 'src/lang/zh-cn.json']
+        }
+      },
+      zh_tw: {
+        files: {
+          'tmp/<%=pkg.file %>_zh_tw.html': ['src/lang/en-us.json', 'src/lang/zh-tw.json']
         }
       }
     },
