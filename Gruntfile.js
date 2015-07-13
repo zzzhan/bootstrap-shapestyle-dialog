@@ -124,6 +124,6 @@ module.exports = function (grunt) {
   });
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
   grunt.registerTask('decrypt', ['cipher:decrypt']);
-  grunt.registerTask('noimg', ['jshint','clean','cipher:encrypt','dotpl','htmlmin','uglify','concat','cssmin','copy']);
-  grunt.registerTask('default', ['noimg','imagemin']);
+  grunt.registerTask('default', ['jshint','clean','cipher:encrypt','dotpl','htmlmin','uglify','concat','cssmin','copy']);
+  grunt.registerTask('imagemin', ['default','imagemin']);
 };
