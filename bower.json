@@ -30,7 +30,6 @@
   "dependencies": {
     "bootstrap-colorpicker-plus": "https://github.com/zzzhan/bootstrap-colorpicker-plus.git",
     "seiyria-bootstrap-slider": "https://github.com/seiyria/bootstrap-slider.git#~4.8.1",
-    "bootstrap-dropdown-submenu": "https://github.com/zzzhan/bootstrap-dropdown-submenu.git",
     "jquery-imagerect": "https://github.com/zzzhan/jquery-imagerect.git",
     "font-awesome-min": "~4.3.0"
   }
