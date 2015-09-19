@@ -69,33 +69,40 @@ module.exports = function (grunt) {
           removeComments: true,
           collapseWhitespace: true
         },
-        files: {
-          'dist/tpl/<%=pkg.file %>.min.html': 'tmp/<%=pkg.file %>.html',
-          'dist/tpl/<%=pkg.file %>_zh_cn.min.html': 'tmp/<%=pkg.file %>_zh_cn.html',
-          'dist/tpl/<%=pkg.file %>_zh_tw.min.html': 'tmp/<%=pkg.file %>_zh_tw.html'
-        }
+	    files: [{       
+          expand: true,
+		  cwd: 'tmp',
+		  src: '**/*.html',
+		  dest: 'dist'
+		}]
       }
     },
     clean: ['tmp', 'dist'],
     dotpl: {
       options: {
-        tpl:'src/tpl/<%=pkg.file %>.html'
+        main:'src/tpl/bootstrap-ssdlg.html',
+        test:'src/tpl/test.html'
       },
-      default_lang: {
+      main: {
         files: {
-          'tmp/<%=pkg.file %>.html': ['src/lang/en-us.json']
+          'tmp/tpl/<%=pkg.file %>.html': ['src/lang/en-US/main.json'],
+          'tmp/tpl/<%=pkg.file %>_zh-CN.html': ['src/lang/en-US/main.json', 'src/lang/zh-CN/main.json'],
+          'tmp/tpl/<%=pkg.file %>_zh-TW.html': ['src/lang/en-US/main.json', 'src/lang/zh-CN/main.json', 'src/lang/zh-TW/main.json']
         }
-      },
-      zh_cn: {
+	  },
+      test: {
+		options: {
+		  renderer: function(k, v) {
+			if(k==='__ssdlg_tpl') {
+				v = grunt.file.read('tmp/tpl/bootstrap-ssdlg.html');
+			}
+			return v;
+		  }
+		},
         files: {
-          'tmp/<%=pkg.file %>_zh_cn.html': ['src/lang/en-us.json', 'src/lang/zh-cn.json']
+          'tmp/test.html': ['src/lang/en-US/main.json']
         }
-      },
-      zh_tw: {
-        files: {
-          'tmp/<%=pkg.file %>_zh_tw.html': ['src/lang/en-us.json', 'src/lang/zh-tw.json']
-        }
-      }
+	  }
     },
     cipher: {
       options: {
